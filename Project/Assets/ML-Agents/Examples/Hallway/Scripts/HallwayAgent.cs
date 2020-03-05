@@ -16,6 +16,7 @@ public class HallwayAgent : Agent
     Renderer m_GroundRenderer;
     HallwaySettings m_HallwaySettings;
     int m_Selection;
+    public GameObject collectible;
 
     public override void InitializeAgent()
     {
@@ -153,5 +154,7 @@ public class HallwayAgent : Agent
             symbolXGoal.transform.position = new Vector3(7f, 0.5f, 22.29f) + area.transform.position;
             symbolOGoal.transform.position = new Vector3(-7f, 0.5f, 22.29f) + area.transform.position;
         }
+
+        //collectible.transform.position = new Vector3(Random.Range(-5f, 5f), 0.73f, collectible.transform.position.z);
     }
 }
