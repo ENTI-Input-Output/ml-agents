@@ -17,6 +17,9 @@ public class HallwayAgent : Agent
     HallwaySettings m_HallwaySettings;
     int m_Selection;
     public GameObject collectible;
+    public GameObject hole1;
+    public GameObject hole2;
+    bool hasCollectible;
 
     public override void InitializeAgent()
     {
@@ -90,6 +93,11 @@ public class HallwayAgent : Agent
             }
             Done();
         }
+        if(col.gameObject.tag == "collectible")
+        {
+            hasCollectible = true;
+            collectible.SetActive(false);
+        }
     }
 
     public override float[] Heuristic()
@@ -115,6 +123,7 @@ public class HallwayAgent : Agent
 
     public override void AgentReset()
     {
+        collectible.SetActive(true);
         var agentOffset = -15f;
         var blockOffset = 0f;
         m_Selection = Random.Range(0, 2);
@@ -154,6 +163,9 @@ public class HallwayAgent : Agent
             symbolXGoal.transform.position = new Vector3(7f, 0.5f, 22.29f) + area.transform.position;
             symbolOGoal.transform.position = new Vector3(-7f, 0.5f, 22.29f) + area.transform.position;
         }
-        collectible.transform.position = new Vector3(0f + Random.Range(-5f, 5f), 0.73f, 0f + Random.Range(10, 15f)) + area.transform.position;
+        collectible.transform.position = new Vector3(0f + Random.Range(-5f, 5f), 0.73f, 0f + Random.Range(10, 14f)) + area.transform.position;
+        hole1.transform.position = new Vector3(0f + Random.Range(-7.5f, 7.5f), 0.73f, 0f + Random.Range(6, 8f)) + area.transform.position;
+        hole2.transform.position = new Vector3(0f + Random.Range(-7.5f, 7.5f), 0.73f, 0f + Random.Range(16, 18f)) + area.transform.position;
+        hasCollectible = false;
     }
 }
