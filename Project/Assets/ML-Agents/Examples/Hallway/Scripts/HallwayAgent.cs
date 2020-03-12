@@ -83,8 +83,16 @@ public class HallwayAgent : Agent
             if ((m_Selection == 0 && col.gameObject.CompareTag("symbol_O_Goal")) ||
                 (m_Selection == 1 && col.gameObject.CompareTag("symbol_X_Goal")))
             {
-                SetReward(1f);
-                StartCoroutine(GoalScoredSwapGroundMaterial(m_HallwaySettings.goalScoredMaterial, 0.5f));
+                if(hasCollectible)
+                {
+                    SetReward(1f);
+                    StartCoroutine(GoalScoredSwapGroundMaterial(m_HallwaySettings.goalScoredMaterial, 0.5f));
+                }
+                else
+                {
+                    SetReward(-0.1f);
+                    StartCoroutine(GoalScoredSwapGroundMaterial(m_HallwaySettings.failMaterial, 0.5f));
+                }
             }
             else
             {
@@ -97,6 +105,12 @@ public class HallwayAgent : Agent
         {
             hasCollectible = true;
             collectible.SetActive(false);
+        }
+        if (col.gameObject.tag == "hole")
+        {
+            SetReward(-0.1f);
+            StartCoroutine(GoalScoredSwapGroundMaterial(m_HallwaySettings.failMaterial, 0.5f));
+            Done();
         }
     }
 

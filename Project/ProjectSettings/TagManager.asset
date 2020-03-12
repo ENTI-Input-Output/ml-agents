@@ -30,6 +30,7 @@ TagManager:
   - purpleAgent
   - purpleGoal
   - collectible
+  - hole
   layers:
   - Default
   - TransparentFX
